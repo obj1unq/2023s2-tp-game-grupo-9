@@ -1,10 +1,10 @@
-# Nombre del juego (<- borrar y completar)
+# Parripollo 
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Fernandez Lovotti Martin
+- Pandolfelli Gian Luca
+- Carrano Paula
 
 ## Capturas
 
@@ -17,6 +17,6 @@
 
 ## Otros
 
-- Curso/Facultad
+- POO 1 / UNQ
 - Versión de wollok
 - Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
