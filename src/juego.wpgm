@@ -2,34 +2,30 @@ import wollok.game.*
 import chef.*
 import direcciones.*
 import extras.*
+import mesada.*
+
 program juego {
-	
-	//configurar el tablero
+	// configurar el tablero
 	game.width(10)
 	game.height(10)
 	game.cellSize(80)
-	
-	//agregar visuales
-	
+	game.boardGround("assets/background.png")
+		// agregar visuales
+	game.addVisual(mesada)
 	game.addVisual(tabla)
-	//game.addVisual(cebolla)
+		// game.addVisual(cebolla)
 	game.addVisual(tomate)
-	//game.addVisual(lechuga)
+		// game.addVisual(lechuga)
 	game.addVisual(horno)
 	game.addVisual(chef)
-	
-	//Acciones
-	keyboard.up().onPressDo({chef.mover(arriba)})	
-	keyboard.down().onPressDo({chef.mover(abajo)})
-	keyboard.left().onPressDo({chef.mover(izquierda)})
-	keyboard.right().onPressDo({chef.mover(derecha)})
-	keyboard.q().onPressDo({chef.agarrarAlimento(tomate)})
-	keyboard.d().onPressDo({chef.dejarAlimento(tomate)})
-	
-	//game.onCollideDo(chef, {almacen => keyboard.q().onPressDo({almacen.abastecer(chef)})})
-
-	
-	//start
+		// Acciones
+	keyboard.up().onPressDo({ chef.mover(arriba) })
+	keyboard.down().onPressDo({ chef.mover(abajo) })
+	keyboard.left().onPressDo({ chef.mover(izquierda) })
+	keyboard.right().onPressDo({ chef.mover(derecha) })
+	keyboard.q().onPressDo({ chef.agarrarAlimento(tomate) })
+	keyboard.d().onPressDo({ chef.dejarAlimento(tomate) })
+		// game.onCollideDo(chef, {almacen => keyboard.q().onPressDo({almacen.abastecer(chef)})})
+		// start
 	game.start()
-	
 }
