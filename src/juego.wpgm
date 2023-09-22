@@ -3,6 +3,7 @@ import chef.*
 import direcciones.*
 import extras.*
 import mesada.*
+import timer.*
 
 program juego {
 	// configurar el tablero
@@ -10,7 +11,9 @@ program juego {
 	game.height(10)
 	game.cellSize(80)
 	game.boardGround("assets/background.png")
+	
 		// agregar visuales
+	game.addVisualIn(timer, game.at(5,9))
 	game.addVisual(mesada)
 	game.addVisual(tabla)
 		// game.addVisual(cebolla)
@@ -18,6 +21,7 @@ program juego {
 		// game.addVisual(lechuga)
 	game.addVisual(horno)
 	game.addVisual(chef)
+	
 		// Acciones
 	keyboard.up().onPressDo({ chef.mover(arriba) })
 	keyboard.down().onPressDo({ chef.mover(abajo) })
@@ -26,6 +30,8 @@ program juego {
 	keyboard.t().onPressDo({ chef.agarrarAlimento(tomate) })
 	keyboard.d().onPressDo({ chef.dejarAlimento(tomate) })
 	keyboard.c().onPressDo({ chef.dejarAlimentoYCortar (tomate,tabla) })
+	game.onTick(1000,"descontar",{timer.descontar()})
+	
 		// game.onCollideDo(chef, {almacen => keyboard.q().onPressDo({almacen.abastecer(chef)})})
 		// start
 	game.start()
