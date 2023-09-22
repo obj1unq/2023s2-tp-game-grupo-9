@@ -23,9 +23,9 @@ program juego {
 	keyboard.down().onPressDo({ chef.mover(abajo) })
 	keyboard.left().onPressDo({ chef.mover(izquierda) })
 	keyboard.right().onPressDo({ chef.mover(derecha) })
-	keyboard.q().onPressDo({ chef.agarrarAlimento(tomate) })
-	heyboard.d().onPressDo({ chef.dejarAlimento(tomate) })
-	keyboard.t().onPressDo({ chef.dejarAlimentoYCortar (tomate,tabla) })
+	keyboard.t().onPressDo({ chef.agarrarAlimento(tomate) })
+	keyboard.d().onPressDo({ chef.dejarAlimento(tomate) })
+	keyboard.c().onPressDo({ chef.dejarAlimentoYCortar (tomate,tabla) })
 		// game.onCollideDo(chef, {almacen => keyboard.q().onPressDo({almacen.abastecer(chef)})})
 		// start
 	game.start()
