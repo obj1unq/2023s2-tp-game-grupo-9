@@ -69,6 +69,12 @@ object chef {
 		const proxima = direccion.siguiente(self.position())		
 		self.position(proxima)		
 	}
+	
+	method dejarAlimentoYCortar(alimento,objeto){
+		self.dejarAlimento(alimento)
+		alimento.cortarAlimentoEn(objeto)
+	}
+	
 }
 
 
