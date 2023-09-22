@@ -9,6 +9,10 @@ object tabla{
 	method position() {
 		return game.at(1,9)
 	}
+	
+	method cortar(alimento){
+		alimento.image("tomate_cortado.png")
+	}
 }
 
 
@@ -70,6 +74,20 @@ object tomate{
 	method dejarLlevada() {
 		libre.position(self.position())
 		estado = libre
+	}
+	
+	method cortarAlimentoEn(objeto){
+		if (self.esLibre() && self.estaEnObjeto(objeto)){
+			objeto.cortar(self)
+		}
+	}
+	
+	method esLibre(){
+		return estado == libre
+	}
+	
+	method estaEnObjeto(objeto){
+		return objeto.position() == self.position()
 	}
 	
 }
