@@ -1,0 +1,49 @@
+import Ingrediente.*
+
+describe "Test de Ingrediente" {
+
+	const lechuga = new Lechuga()
+	const carne = new Carne()
+	const pan = new Pan()
+
+	test "Al inicializarse, su estado es fresco y su imagen es la por defecto" {
+		assert.equals(fresco, lechuga.estado())
+		assert.equals("lechuga.png", lechuga.image())
+	}
+
+	test "Al cortar la lechuga esta cambia de estado e imagen" {
+		lechuga.cortar()
+		assert.equals(cortado, lechuga.estado())
+		assert.equals("lechuga-cortado.png", lechuga.image())
+	}
+
+	test "La lechuga no se puede cocinar" {
+		assert.throwsException({ lechuga.cocinar()})
+	}
+
+	test "La carne no se puede cocinar si no se la cortó previamente" {
+		assert.equals(fresco, carne.estado())
+		assert.throwsException({ carne.cocinar()})
+	}
+
+	test "La carne se puede cocinar si se la cortó previamente" {
+		carne.cortar()
+		assert.equals(cortado, carne.estado())
+		carne.cocinar()
+		assert.equals(cocinado, carne.estado())
+	}
+
+	test "La carne se puede cortar y se puede cocinar, pero queda el estado final" {
+		carne.cortar()
+		carne.cocinar()
+		assert.equals(cocinado, carne.estado())
+		assert.equals("carne-cocinado.png", carne.image())
+	}
+
+	test "El pan no se puede cortar ni cocinar" {
+		assert.throwsException({ pan.cortar()})
+		assert.throwsException({ pan.cocinar()})
+	}
+
+}
+
