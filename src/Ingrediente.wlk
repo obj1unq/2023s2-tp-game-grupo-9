@@ -15,6 +15,7 @@ class Ingrediente {
 
 	method cocinar() {
 		self.validarCocinar()
+		self.validarEstado()
 		estado = cocinado
 	}
 
@@ -26,6 +27,12 @@ class Ingrediente {
 
 	method validarCocinar() {
 		if (!esCocinable) {
+			self.error("No se puede cocinar")
+		}
+	}
+
+	method validarEstado() {
+		if (estado != cortado) {
 			self.error("No se puede cocinar")
 		}
 	}
