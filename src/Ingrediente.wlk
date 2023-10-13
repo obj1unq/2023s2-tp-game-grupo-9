@@ -5,6 +5,7 @@ class Ingrediente {
 	var property nombre
 	var property esCortable = true
 	var property esCocinable = false
+	var property esSuperficie = false
 
 	method image() = nombre + estado.nombre() + ".png"
 

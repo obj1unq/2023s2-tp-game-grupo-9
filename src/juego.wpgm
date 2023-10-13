@@ -4,8 +4,15 @@ import direcciones.*
 import extras.*
 import mesada.*
 import timer.*
+import Ingrediente.*
 
 program juego {
+	
+	const jugador = new Chef()
+	game.addVisual(jugador)
+	
+	game.addVisualIn(new Tomate(),game.at(2,6)) 
+	
 	// configurar el tablero
 	game.width(10)
 	game.height(10)
@@ -17,19 +24,19 @@ program juego {
 	game.addVisual(mesada)
 	game.addVisual(tabla)
 		// game.addVisual(cebolla)
-	game.addVisual(tomate)
+	
 		// game.addVisual(lechuga)
 	game.addVisual(horno)
-	game.addVisual(chef)
 	
 		// Acciones
-	keyboard.up().onPressDo({ chef.mover(arriba) })
-	keyboard.down().onPressDo({ chef.mover(abajo) })
-	keyboard.left().onPressDo({ chef.mover(izquierda) })
-	keyboard.right().onPressDo({ chef.mover(derecha) })
-	keyboard.t().onPressDo({ chef.agarrarAlimento(tomate) })
-	keyboard.d().onPressDo({ chef.dejarAlimento(tomate) })
-	keyboard.c().onPressDo({ chef.dejarAlimentoYCortar (tomate,tabla) })
+	keyboard.up().onPressDo({ jugador.arriba() })
+	keyboard.down().onPressDo({ jugador.abajo() })
+	keyboard.left().onPressDo({jugador.izquierda() })
+	keyboard.right().onPressDo({ jugador.derecha() })
+	keyboard.t().onPressDo({jugador.agarrarOSoltarObjeto()})
+	//keyboard.t().onPressDo({ jugador.agarrarAlimento(tomate) })
+	//keyboard.d().onPressDo({ jugador.dejarAlimento(tomate) })
+	//keyboard.c().onPressDo({jugador.dejarAlimentoYCortar (tomate,tabla) })
 	game.onTick(1000,"descontar",{timer.descontar()})
 	
 		// game.onCollideDo(chef, {almacen => keyboard.q().onPressDo({almacen.abastecer(chef)})})

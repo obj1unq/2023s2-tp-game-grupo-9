@@ -1,80 +1,166 @@
 import wollok.game.*
-import direcciones.*
 import extras.*
+import mesada.*
+import Ingrediente.*
 
-object chef {
-	var alimentoEnMano  //Aqui cambia segun el alimento
-	var property position  = game.at(2, 5)
+class Chef {
+		
+	var property position = game.at(2,5)
+	var property orientacion = 'down'
+	var property image = 'player-' + orientacion + '.png'
+	var superficieDelante = null
+	var objetoEnMano = null
 	
+	method haySuperficieDelante() { return
+		if (orientacion == 'up') {
+	            game.getObjectsIn(position.up(1)).any({e => e.esSuperficie()})
+	        } else if (orientacion == 'down') {
+	            game.getObjectsIn(position.down(1)).any({e => e.esSuperficie()})
+	        } else if (orientacion == 'left') {
+	            game.getObjectsIn(position.left(1)).any({e => e.esSuperficie()})
+	        } else if (orientacion == 'right') {
+	            game.getObjectsIn(position.right(1)).any({e => e.esSuperficie()})
+	        }
+	 }
+	 	
 	
-	method abastecerse(alimento){
-		self.agarrarAlimento(alimento)
+	method obtenerSuperficieDelante(){ return
+		if (orientacion == 'up') {
+	            game.getObjectsIn(position.up(1)).find({e => e.esSuperficie()})
+	        } else if (orientacion == 'down') {
+	            game.getObjectsIn(position.down(1)).find({e => e.esSuperficie()})
+	        } else if (orientacion == 'left') {
+	            game.getObjectsIn(position.left(1)).find({e => e.esSuperficie()})
+	        } else if (orientacion == 'right') {
+	            game.getObjectsIn(position.right(1)).find({e => e.esSuperficie()})
+	        }
+	 	}
+	
+	 
+	method actualizarSuperficieDelante() {
+		if (self.haySuperficieDelante()) {superficieDelante = self.obtenerSuperficieDelante()}
+		else {superficieDelante = null}
 	}
 	
-	method agarrarAlimento(alimento) {
-		self.validarPosition(alimento)
-		alimento.serLlevado(self)
+	method arriba() {
+		orientacion = 'up'
+	    self.actualizarImagen()
+	    if (self.haySuperficieDelante()){superficieDelante = self.obtenerSuperficieDelante() }
+	    else {
+	        position = position.up(1)
+	        self.actualizarSuperficieDelante()
+	        }
+	    self.actualizarPosicion(objetoEnMano)
 	}
 	
-	method dejarAlimento(alimento){
-		alimento.dejarLlevada()
+	method abajo() {
+		orientacion = 'down'
+	    self.actualizarImagen()
+	    if (self.haySuperficieDelante()){superficieDelante = self.obtenerSuperficieDelante() }
+	    else {
+	        superficieDelante = null
+	        position = position.down(1)
+	        self.actualizarSuperficieDelante()
+	        }
+	    self.actualizarPosicion(objetoEnMano)
+	  
 	}
 	
-	method validarPosition(algo) {
-		if(position != algo.position()) {
-			self.error("No estoy donde puedo hacerlo")
+	method izquierda() {
+		orientacion = 'left'
+	    self.actualizarImagen()
+	    if (self.haySuperficieDelante()){superficieDelante = self.obtenerSuperficieDelante() }
+	    else {
+	        superficieDelante = null
+	        position = position.left(1)
+	        self.actualizarSuperficieDelante()
+	        }
+	    self.actualizarPosicion(objetoEnMano)
+	    
+	}
+	
+	method derecha() {
+		orientacion = 'right'
+	    self.actualizarImagen()
+	    if (self.haySuperficieDelante()){superficieDelante = self.obtenerSuperficieDelante() }
+	    else {
+	        superficieDelante = null
+	        position = position.right(1)
+	       self.actualizarSuperficieDelante()
+	        }
+	    self.actualizarPosicion(objetoEnMano)
+	    
+	}	
+		
+	method objetoEnMano() = objetoEnMano
+
+	method actualizarImagen() {
+    	image = 'player-' + orientacion + '.png'
+	}
+	method actualizarPosicion(unObjeto) {
+	    if (unObjeto != null) {
+	        if (orientacion == 'up') {
+	            unObjeto.position(position.up(1))
+	        } else if (orientacion == 'down') {
+	            unObjeto.position(position.down(1))
+	        } else if (orientacion == 'left') {
+	            unObjeto.position(position.left(1))
+	        } else if (orientacion == 'right') {
+	            unObjeto.position(position.right(1))
+	        }
+	    } 
+	}
+	
+	method posicionDelante() { return
+		if (orientacion == 'up') {
+	            position.up(1)
+	    } else if (orientacion == 'down') {
+	            position.down(1)
+	    } else if (orientacion == 'left') {
+	           position.left(1)
+	    } else if (orientacion == 'right') {
+	            position.right(1)
+	        
+	    } 
+	}
+	
+	method dejarObjeto() {
+		superficieDelante.ponerIngrediente(objetoEnMano)
+		superficieDelante.actualizarImagen()
+		objetoEnMano = null
+	}
+	
+	method accion() {
+		superficieDelante.accion()
+	}
+	
+	method agarrarObjeto() {
+		objetoEnMano = superficieDelante.ingredienteApoyado()
+		self.actualizarPosicion(objetoEnMano)
+		if (superficieDelante.esDespensa() and !superficieDelante.estaOcupada()) {
+			game.addVisual(objetoEnMano)
 		}
+		superficieDelante.sacarIngrediente()
+		superficieDelante.actualizarImagen()
 	}
 	
-	method terminar() {
-
+	method agarrarOSoltarObjeto(){
+		if(objetoEnMano == null){
+			self.agarrarObjeto()
+		}
+		else
+			self.dejarObjeto()
 	}
-	
-	method image() {
-		return "assets/chef.png"
-	}
-	
-	
-	method textColor() {
-		return "FF0000FF"
-	}
-	
-
-	method position() {
-		return position
-	}
-
-	method position(_position) {
-		position = _position
-	}
-
-	
-	method puedeOcupar(posicion) {
-		return tablero.pertenece(posicion)
-	}
-	
-	method sePuedeMover(direccion) {
-		const proxima = direccion.siguiente(self.position())
-		return self.puedeOcupar(proxima) 
-	}
-	
-	method validarMover(direccion) {
-		if(not self.sePuedeMover(direccion)) {
-			self.error("No puedo ir ahí")
-		} 
-	}
-	
-	method mover(direccion) {
-		self.validarMover(direccion)
-		const proxima = direccion.siguiente(self.position())		
-		self.position(proxima)		
-	}
-	
-	method dejarAlimentoYCortar(alimento,objeto){
-		self.dejarAlimento(alimento)
-		alimento.cortarAlimentoEn(objeto)
-	}
-	
 }
+	
+	/*method textColor() {
+		return "FF0000FF"
+	}*/
+	
+	
+	
+	
+	
+
 
 
