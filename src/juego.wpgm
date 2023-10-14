@@ -4,6 +4,8 @@ import direcciones.*
 import extras.*
 import mesada.*
 import timer.*
+import randomizer.*
+import perk.*
 
 program juego {
 	// configurar el tablero
@@ -30,7 +32,10 @@ program juego {
 	keyboard.t().onPressDo({ chef.agarrarAlimento(tomate) })
 	keyboard.d().onPressDo({ chef.dejarAlimento(tomate) })
 	keyboard.c().onPressDo({ chef.dejarAlimentoYCortar (tomate,tabla) })
+	//timer
 	game.onTick(1000,"descontar tiempo" ,{timer.descontarTiempo()})
+	game.schedule(1000.randomUpTo(96000), {=> perk.aparicion()})
+	game.onCollideDo(chef, {pocion => pocion.esActivada(chef)})
 		// game.onCollideDo(chef, {almacen => keyboard.q().onPressDo({almacen.abastecer(chef)})})
 		// start
 	game.start()

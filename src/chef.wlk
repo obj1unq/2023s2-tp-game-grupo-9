@@ -75,6 +75,11 @@ object chef {
 		alimento.cortarAlimentoEn(objeto)
 	}
 	
+	method activar(pocion){
+		pocion.aplicarBeneficio()
+		game.removeVisual(pocion)
+	}
+	
 }
 
 
