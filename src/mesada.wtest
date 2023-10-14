@@ -1,0 +1,63 @@
+import Mesada.*
+import Ingrediente.*
+import wollok.game.*
+
+describe "Test de Mesada" {
+
+	// Mesadas
+	const mesada = new Mesada()
+	const despensaDePan = new DespensaDePan()
+	const plancha = new Plancha()
+	const tablaDeCortar = new TablaDeCortar()
+	// Ingredientes
+	const pan = new Pan()
+	const carne = new Carne()
+	const tomate = new Tomate()
+	const lechuga = new Lechuga()
+
+	test "La mesada, inicialmente, se encuentra vacia" {
+		assert.notThat(mesada.estaOcupada())
+	}
+
+	test "Apoyar un tomate sobre la mesada" {
+		mesada.apoyar(tomate)
+		assert.that(mesada.estaOcupada())
+		assert.equals(tomate, mesada.objetoApoyado())
+	}
+
+	test "No se puede apoyar un objeto si la mesada esta ocupada" {
+		mesada.apoyar(tomate)
+		assert.that(mesada.estaOcupada())
+		assert.equals(tomate, mesada.objetoApoyado())
+		assert.throwsException({ mesada.apoyar(lechuga)})
+	}
+
+	test "Al dejar un objeto cocinable en la plancha, este se cocina" {
+		carne.cortar()
+		plancha.apoyar(carne)
+		assert.equals(cocinado, carne.estado())
+		assert.equals("plancha-ocupada.png", plancha.image())
+	}
+
+	test "Un objeto no cocinable no se puede dejar sobre la plancha" {
+		assert.throwsException({ plancha.apoyar(lechuga)}) // la lechuga no es cocinable
+	}
+
+	test "La tabla de cortar, al usarla, corta el objeto cortable" {
+		tablaDeCortar.apoyar(carne)
+		tablaDeCortar.accion()
+		assert.equals(cortado, carne.estado())
+	}
+
+	test "Si un objeto no es cortable, no lo corta" {
+		tablaDeCortar.apoyar(pan) // el pan no es cortable
+		assert.throwsException({ tablaDeCortar.accion()})
+	}
+
+	test "La despensa, al usarla, devuelve una nueva instancia del objeto que provee" {
+		despensaDePan.accion()
+		assert.notEquals(null, despensaDePan.objetoApoyado()) // el objeto apoyado es un pan
+	}
+
+}
+
