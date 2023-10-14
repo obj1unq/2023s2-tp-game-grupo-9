@@ -2,7 +2,7 @@ import wollok.game.*
 import chef.*
 import direcciones.*
 import extras.*
-import mesada.*
+import Mesada.*
 import timer.*
 import Ingrediente.*
 
@@ -18,16 +18,13 @@ program juego {
 	game.height(10)
 	game.cellSize(80)
 	game.boardGround("assets/background.png")
-	
 		// agregar visuales
-	game.addVisualIn(timer, game.at(5,9))
-	game.addVisual(mesada)
+	game.addVisualIn(timer, game.at(5, 9))
 	game.addVisual(tabla)
 		// game.addVisual(cebolla)
 	
 		// game.addVisual(lechuga)
 	game.addVisual(horno)
-	
 		// Acciones
 	keyboard.up().onPressDo({ jugador.arriba() })
 	keyboard.down().onPressDo({ jugador.abajo() })
@@ -38,7 +35,6 @@ program juego {
 	//keyboard.d().onPressDo({ jugador.dejarAlimento(tomate) })
 	//keyboard.c().onPressDo({jugador.dejarAlimentoYCortar (tomate,tabla) })
 	game.onTick(1000,"descontar",{timer.descontar()})
-	
 		// game.onCollideDo(chef, {almacen => keyboard.q().onPressDo({almacen.abastecer(chef)})})
 		// start
 	game.start()
