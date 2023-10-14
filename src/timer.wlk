@@ -1,26 +1,42 @@
 import wollok.game.*
 
 object timer {
-	var property image= "assets/timer.png"
-	var property tiempoSeg = 60
-	var property tiempoMin = 1
+	var property image= "assets/temporalizador.jpg"
+	var property tiempo = 120
+	//var property temporalizadorActivo
 	
-	method text(){
-		return tiempoMin.toString() + ":" + tiempoSeg.toString()
+		method descontarTiempo(){
+		if (tiempo > 0){
+				self.tiempoRestante()
+		}else  {
+			game.removeTickEvent("descontar tiempo")
+		}
 	}
 	
-	method descontar(){
-		if (not self.esCero(tiempoSeg)){
-			tiempoSeg -= 1}
-			else if (self.esCero(tiempoSeg) &&  not self.esCero(tiempoMin)){
-				tiempoMin -=1
-				tiempoSeg = 59
-			}else {
-				game.removeTickEvent("descontar")
-			}
+	// if(temporalizadorActivo)
+	method tiempoRestante(){
+			tiempo -=1
+	}
+
+	method minutos(t){
+		return t.div(60)
 	}
 	
-	method esCero(t) {
-		return t == 0
+	method segundos(t){
+		return t % 60
 	}
+
+	method text (){
+		return self.minutos(tiempo).toString() + ":" + self.segundos(tiempo).toString()
+	}
+	
+	//method pausarTemporalizador(){
+	//	temporalizadorActivo = false
+	//}
+	
+	//method reanudarTemporalizador(){
+	//	temporalizadorActivo= true
+	//	self.descontarTiempo()
+	//}
+	
 }

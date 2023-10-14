@@ -13,7 +13,7 @@ program juego {
 	game.boardGround("assets/background.png")
 	
 		// agregar visuales
-	game.addVisualIn(timer, game.at(5,9))
+	game.addVisualIn(timer, game.at(4,9))
 	game.addVisual(mesada)
 	game.addVisual(tabla)
 		// game.addVisual(cebolla)
@@ -30,8 +30,7 @@ program juego {
 	keyboard.t().onPressDo({ chef.agarrarAlimento(tomate) })
 	keyboard.d().onPressDo({ chef.dejarAlimento(tomate) })
 	keyboard.c().onPressDo({ chef.dejarAlimentoYCortar (tomate,tabla) })
-	game.onTick(1000,"descontar",{timer.descontar()})
-	
+	game.onTick(1000,"descontar tiempo" ,{timer.descontarTiempo()})
 		// game.onCollideDo(chef, {almacen => keyboard.q().onPressDo({almacen.abastecer(chef)})})
 		// start
 	game.start()
