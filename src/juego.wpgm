@@ -7,31 +7,70 @@ import timer.*
 import Ingrediente.*
 
 program juego {
+	
 	const jugador = new Chef()
 	game.addVisual(jugador)
-	game.addVisualIn(new Tomate(), game.at(2, 6))
-		// configurar el tablero
-	game.width(10)
-	game.height(10)
+	
+	// configurar el tablero
+	game.width(13)
+	game.height(8)
 	game.cellSize(80)
 	game.boardGround("assets/background.png")
-		// agregar visuales
+	
+	// agregar visuales
 	game.addVisualIn(timer, game.at(5, 9))
-	game.addVisual(tabla)
-		// game.addVisual(cebolla)
-		// game.addVisual(lechuga)
-	game.addVisual(horno)
-		// Acciones
+	
+	// Fila de abajo
+	const mesadasLibresFilAbj = #{ 2, 4 }
+	(#{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }).forEach({ x => 
+		if (!mesadasLibresFilAbj.contains(x)) {
+			game.addVisualIn(new Mesada(), game.at(x, 0))
+		}
+		game.addVisualIn(new TablaDeCortar(), game.at(2, 0))
+		game.addVisualIn(new TablaDeCortar(), game.at(4, 0))
+	})
+	
+	// Fila de arriba
+	const mesadasLibresFilArr = #{ 2, 3, 8, 9, 10, 11 }
+	(#{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 }).forEach({ x => 
+		if (!mesadasLibresFilArr.contains(x)) {
+			game.addVisualIn(new Mesada(), game.at(x, 7))
+		}
+		game.addVisualIn(new Plancha(), game.at(8, 7))
+		game.addVisualIn(new Plancha(), game.at(9, 7))
+		game.addVisualIn(new Plancha(), game.at(10, 7))
+		game.addVisualIn(new Plancha(), game.at(11, 7))
+	})
+	
+	// Columna izquierda
+	const mesadasLibresColIzq = #{ 6, 5, 4, 3, 1 }
+	(#{ 1, 2, 3, 4, 5, 6 }).forEach({ x =>
+		if (!mesadasLibresColIzq.contains(x)) {
+			game.addVisualIn(new Mesada(), game.at(0, x))
+		}
+		game.addVisualIn(new DespensaDeTomate(), game.at(0, 6))
+		game.addVisualIn(new DespensaDeCarne(), game.at(0, 5))
+		game.addVisualIn(new DespensaDeLechuga(), game.at(0, 4))
+		game.addVisualIn(new DespensaDePan(), game.at(0, 3))
+		game.addVisualIn(new Plancha(), game.at(0, 1))
+	})
+	
+	// Columna derecha
+	const mesadasLibresColDer = #{ 2, 3, 4 }
+	(#{ 1, 2, 3, 4, 5, 6 }).forEach({ x => 
+		if (!mesadasLibresColDer.contains(x)) {
+			game.addVisualIn(new Mesada(), game.at(12, x))
+		}
+	})
+	
+	// Acciones
 	keyboard.up().onPressDo({ jugador.arriba() })
 	keyboard.down().onPressDo({ jugador.abajo() })
 	keyboard.left().onPressDo({ jugador.izquierda() })
 	keyboard.right().onPressDo({ jugador.derecha() })
 	keyboard.t().onPressDo({ jugador.agarrarOSoltarObjeto() })
-		// keyboard.t().onPressDo({ jugador.agarrarAlimento(tomate) })
-		// keyboard.d().onPressDo({ jugador.dejarAlimento(tomate) })
-		// keyboard.c().onPressDo({jugador.dejarAlimentoYCortar (tomate,tabla) })
+	
+	// Timer
 	game.onTick(1000, "descontar", { timer.descontar() })
-		// game.onCollideDo(chef, {almacen => keyboard.q().onPressDo({almacen.abastecer(chef)})})
-		// start
 	game.start()
 }
