@@ -1,3 +1,4 @@
+import wollok.game.*
 import Ingrediente.*
 
 class Mesada {
@@ -106,5 +107,20 @@ class Plancha inherits Mesada {
 		}
 	}
 
+}
+
+class Tacho inherits Mesada {
+	
+	override method image() = "tacho.png"
+	
+	override method apoyar(objeto) {
+		if (objeto.esPlato()){
+			objeto.limpiarPlato()
+		} else {
+			game.removeVisual(objeto)
+			objetoApoyado = null
+		}
+	}
+	
 }
 

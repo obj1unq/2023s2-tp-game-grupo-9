@@ -52,7 +52,7 @@ program juego {
 		game.addVisualIn(new DespensaDeCarne(), game.at(0, 5))
 		game.addVisualIn(new DespensaDeLechuga(), game.at(0, 4))
 		game.addVisualIn(new DespensaDePan(), game.at(0, 3))
-		game.addVisualIn(new Plancha(), game.at(0, 1))
+		game.addVisualIn(new Tacho(), game.at(0, 1))
 	})
 	
 	// Columna derecha
