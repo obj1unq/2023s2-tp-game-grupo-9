@@ -5,10 +5,10 @@ import wollok.game.*
 describe "Test de Mesada" {
 
 	// Mesadas
-	const mesada = new Mesada()
-	const despensaDePan = new DespensaDePan()
-	const plancha = new Plancha()
-	const tablaDeCortar = new TablaDeCortar()
+	const mesada = new Mesada(position=game.at(0, 9))
+	const despensaDePan = new DespensaDePan(position= game.at(0, 3))
+	const plancha = new Plancha(position= game.at(9, 7))
+	const tablaDeCortar = new TablaDeCortar(position= game.at(2, 0))
 	// Ingredientes
 	const pan = new Pan()
 	const carne = new Carne()
