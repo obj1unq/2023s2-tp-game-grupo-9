@@ -5,6 +5,9 @@ import extras.*
 import Mesada.*
 import timer.*
 import Ingrediente.*
+import perk.*
+import randomizer.*
+
 
 program juego {
 	
@@ -18,7 +21,7 @@ program juego {
 	game.boardGround("assets/background.png")
 	
 	// agregar visuales
-	game.addVisualIn(timer, game.at(5, 9))
+	game.addVisualIn(timer, game.at(9, 7))
 	
 	// Fila de abajo
 	const mesadasLibresFilAbj = #{ 2, 4 }
@@ -37,7 +40,6 @@ program juego {
 			game.addVisualIn(new Mesada(), game.at(x, 7))
 		}
 		game.addVisualIn(new Plancha(), game.at(8, 7))
-		game.addVisualIn(new Plancha(), game.at(9, 7))
 		game.addVisualIn(new Plancha(), game.at(10, 7))
 		game.addVisualIn(new Plancha(), game.at(11, 7))
 	})
@@ -70,7 +72,10 @@ program juego {
 	keyboard.right().onPressDo({ jugador.derecha() })
 	keyboard.t().onPressDo({ jugador.agarrarOSoltarObjeto() })
 	
-	// Timer
-	game.onTick(1000, "descontar", { timer.descontar() })
+	//timer
+	game.onTick(1000,"descontar tiempo" ,{timer.descontarTiempo()})
+	game.schedule(1000.randomUpTo(96000), {=> perk.aparicion()})
+	game.onCollideDo(jugador, {pocion => pocion.esActivada(jugador)})
+	
 	game.start()
 }

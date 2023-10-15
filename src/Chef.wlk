@@ -151,6 +151,10 @@ class Chef {
 			self.agarrarObjeto()
 		} else self.dejarObjeto()
 	}
-
+	
+	method activar(pocion){
+		pocion.aplicarBeneficio()
+		game.removeVisual(pocion)
+	}
 }
 
