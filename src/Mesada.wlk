@@ -6,6 +6,7 @@ class Mesada {
 	var property image = "mesada.png"
 	var property objetoApoyado = null
 	const property esSuperficie = true
+	var property position
 
 	method estaOcupada() = objetoApoyado != null
 
