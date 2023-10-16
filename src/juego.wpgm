@@ -31,6 +31,7 @@ program juego {
 	keyboard.left().onPressDo({ jugador.izquierda() })
 	keyboard.right().onPressDo({ jugador.derecha() })
 	keyboard.t().onPressDo({ jugador.agarrarOSoltarObjeto() })
+	keyboard.a().onPressDo({ jugador.accion() })
 	
 	//timer
 	game.onTick(1000,"descontar tiempo" ,{timer.descontarTiempo()})
