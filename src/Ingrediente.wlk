@@ -6,17 +6,20 @@ class Ingrediente {
 	var property esCortable = true
 	var property esCocinable = false
 	var property esSuperficie = false
+	const property esPlato = false
 
 	method image() = nombre + estado.nombre() + ".png"
 
 	method cortar() {
 		self.validarCortar()
+		esCortable = false
 		estado = cortado
 	}
 
 	method cocinar() {
 		self.validarCocinar()
 		self.validarEstado()
+		esCocinable = false
 		estado = cocinado
 	}
 
