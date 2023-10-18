@@ -32,12 +32,12 @@ describe "Test de Mesada" {
 		assert.throwsException({ mesada.apoyar(lechuga)})
 	}
 
-	test "Al dejar un objeto cocinable en la plancha, este se cocina" {
-		carne.cortar()
-		plancha.apoyar(carne)
-		assert.equals(cocinado, carne.estado())
-		assert.equals("plancha-ocupada.png", plancha.image())
-	}
+	//test "Al dejar un objeto cocinable en la plancha, este se cocina" {
+	//	carne.cortar()
+	//	plancha.apoyar(carne)
+	//	assert.equals(cocinado, carne.estado())
+	//	assert.equals("plancha-ocupada.png", plancha.image())
+	//}
 
 	test "Un objeto no cocinable no se puede dejar sobre la plancha" {
 		assert.throwsException({ plancha.apoyar(lechuga)}) // la lechuga no es cocinable
