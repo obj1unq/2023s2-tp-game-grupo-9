@@ -128,7 +128,6 @@ class Chef {
 
 	method dejarObjeto() {
 		superficieDelante.apoyar(objetoEnMano)
-		superficieDelante.actualizarImage()
 		objetoEnMano = null
 	}
 
@@ -143,13 +142,14 @@ class Chef {
 			game.addVisual(objetoEnMano)
 		}
 		superficieDelante.sacar()
-		superficieDelante.actualizarImage()
 	}
 
 	method agarrarOSoltarObjeto() {
 		if (objetoEnMano == null) {
 			self.agarrarObjeto()
-		} else self.dejarObjeto()
+		} else {
+			self.dejarObjeto()		
+		}
 	}
 	
 	method activar(pocion){

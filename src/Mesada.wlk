@@ -1,5 +1,6 @@
 import wollok.game.*
 import Ingrediente.*
+import extras.*
 
 class Mesada {
 
@@ -52,10 +53,6 @@ class DespensaDePan inherits Despensa {
 
 	override method objetoApoyado() = if (self.estaOcupada()) super() else new Pan()
 
-	override method accion() {
-		self.objetoApoyado(new Pan())
-	}
-
 }
 
 class DespensaDeTomate inherits Despensa {
@@ -82,9 +79,17 @@ class DespensaDeCarne inherits Despensa {
 
 }
 
+class DespensaDePlato inherits Despensa {
+
+	override method image() = "despensa-plato.png"
+
+	override method objetoApoyado() = if (self.estaOcupada()) super() else new Plato()
+
+}
+
 class TablaDeCortar inherits Mesada {
 
-	override method image() = if (self.estaOcupada()) objetoApoyado.nombre() + "-tabla-de-cortar.png" else "tabla-de-cortar.png"
+	override method image() = if (self.estaOcupada()) "tabla-de-cortar.png" else "tabla-de-cortar-vacia.png"
 
 	override method accion() {
 		objetoApoyado.cortar()
@@ -94,7 +99,7 @@ class TablaDeCortar inherits Mesada {
 
 class Plancha inherits Mesada {
 
-	override method image() = if (self.estaOcupada()) "plancha-ocupada.png" else "plancha-vacia.png"
+	override method image() = "plancha-vacia.png"
 
 	override method apoyar(objeto) {
 		self.validarObjeto(objeto)
