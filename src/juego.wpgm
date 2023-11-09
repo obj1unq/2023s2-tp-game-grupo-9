@@ -15,15 +15,11 @@ program juego {
 	game.addVisual(jugador)
 	
 	// configurar el tablero
-	game.width(13)
-	game.height(8)
 	game.cellSize(80)
 	game.boardGround("assets/background.png")
-	
-	// agregar visuales
-	game.addVisualIn(timer, game.at(8, 7))
-	
+		
 	mapa.generar()
+	game.addVisualIn(timer, game.at(13, 7))
 	
 	// Acciones
 	keyboard.up().onPressDo({ jugador.arriba() })

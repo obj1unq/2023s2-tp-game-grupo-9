@@ -1,7 +1,7 @@
 import wollok.game.*
 
 object timer {
-	var property image= "assets/timer.png"
+	var property image= "assets/timer.jpg"
 	var property tiempo = 120
 	var property temporalizadorActivo = true
 	
@@ -28,6 +28,8 @@ object timer {
 	method text (){
 		return self.minutos(tiempo).toString() + ":" + self.segundos(tiempo).toString()
 	}
+	
+	method textColor() ="#4c2882"
 	
 	method pausarTemporalizador(){
 		temporalizadorActivo = false
