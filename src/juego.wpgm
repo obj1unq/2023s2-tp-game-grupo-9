@@ -8,7 +8,7 @@ import Ingrediente.*
 import perk.*
 import randomizer.*
 import mapa.*
-
+import Chef.*
 
 program juego {
 	const jugador = new Chef()

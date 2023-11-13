@@ -3,36 +3,67 @@ import extras.*
 import Mesada.*
 import Ingrediente.*
 
-class Chef {
 
-	var property position = game.at(2, 5)
-	var property orientacion = 'down'
-	var property image = 'player-' + orientacion + '.png'
+class Movement{
+  var property position = game.at(2, 5)
+  var property orientacion = down
+  var property image = 'player-' + orientacion.text() + '.png'
+  
+  method actualizarImagen() {
+		image = 'player-' + orientacion.text() + '.png'
+  }
+	
+  method arriba() {
+    orientacion = up
+    self.actualizarImagen()
+    self.movement()
+  }
+
+  method abajo() {
+    orientacion = down
+    self.actualizarImagen()
+    self.movement()
+  }
+
+  method izquierda() {
+    orientacion = left
+    self.actualizarImagen()
+    self.movement()
+  }
+
+  method derecha() {
+    orientacion = right
+    self.actualizarImagen()
+    self.movement()
+  }
+
+  method obtenerSuperficieDelante() 
+    // Implementar en chef esta lógica para obtener la superficie delante
+    // del movimiento.
+  
+
+  method actualizarPosicion(objetoEnMano) {
+    // Implementar en chef esta lógica para actualizar la posición
+    // del movimiento.
+  }
+  
+  method movement(){
+  	// Implementar en chef
+  }
+
+}
+
+
+class Chef inherits Movement {	
 	var superficieDelante = null
 	var objetoEnMano = null
 
 	method haySuperficieDelante() {
-		return if (orientacion == 'up') {
-			game.getObjectsIn(position.up(1)).any({ e => e.esSuperficie()})
-		} else if (orientacion == 'down') {
-			game.getObjectsIn(position.down(1)).any({ e => e.esSuperficie()})
-		} else if (orientacion == 'left') {
-			game.getObjectsIn(position.left(1)).any({ e => e.esSuperficie()})
-		} else if (orientacion == 'right') {
-			game.getObjectsIn(position.right(1)).any({ e => e.esSuperficie()})
-		}
+		return game.getObjectsIn(orientacion.mover(position)).any({ e => e.esSuperficie()})
 	}
 
-	method obtenerSuperficieDelante() {
-		return if (orientacion == 'up') {
-			game.getObjectsIn(position.up(1)).find({ e => e.esSuperficie()})
-		} else if (orientacion == 'down') {
-			game.getObjectsIn(position.down(1)).find({ e => e.esSuperficie()})
-		} else if (orientacion == 'left') {
-			game.getObjectsIn(position.left(1)).find({ e => e.esSuperficie()})
-		} else if (orientacion == 'right') {
-			game.getObjectsIn(position.right(1)).find({ e => e.esSuperficie()})
-		}
+	override method obtenerSuperficieDelante() {
+		return game.getObjectsIn(orientacion.mover(position)).find({ e => e.esSuperficie()})
 	}
 
 	method actualizarSuperficieDelante() {
@@ -43,52 +74,12 @@ class Chef {
 		}
 	}
 
-	method arriba() {
-		orientacion = 'up'
-		self.actualizarImagen()
-		if (self.haySuperficieDelante()) {
-			superficieDelante = self.obtenerSuperficieDelante()
-		} else {
-			position = position.up(1)
-			self.actualizarSuperficieDelante()
-		}
-		self.actualizarPosicion(objetoEnMano)
-	}
-
-	method abajo() {
-		orientacion = 'down'
-		self.actualizarImagen()
+	override method movement(){
 		if (self.haySuperficieDelante()) {
 			superficieDelante = self.obtenerSuperficieDelante()
 		} else {
 			superficieDelante = null
-			position = position.down(1)
-			self.actualizarSuperficieDelante()
-		}
-		self.actualizarPosicion(objetoEnMano)
-	}
-
-	method izquierda() {
-		orientacion = 'left'
-		self.actualizarImagen()
-		if (self.haySuperficieDelante()) {
-			superficieDelante = self.obtenerSuperficieDelante()
-		} else {
-			superficieDelante = null
-			position = position.left(1)
-			self.actualizarSuperficieDelante()
-		}
-		self.actualizarPosicion(objetoEnMano)
-	}
-
-	method derecha() {
-		orientacion = 'right'
-		self.actualizarImagen()
-		if (self.haySuperficieDelante()) {
-			superficieDelante = self.obtenerSuperficieDelante()
-		} else {
-			superficieDelante = null
-			position = position.right(1)
+			position = orientacion.mover(position)
 			self.actualizarSuperficieDelante()
 		}
 		self.actualizarPosicion(objetoEnMano)
@@ -96,35 +87,10 @@ class Chef {
 
 	method objetoEnMano() = objetoEnMano
 
-	method actualizarImagen() {
-		image = 'player-' + orientacion + '.png'
+	override method actualizarPosicion(unObjeto) {
+		if (unObjeto != null) {unObjeto.position(orientacion.mover(position))}
 	}
 
-	method actualizarPosicion(unObjeto) {
-		if (unObjeto != null) {
-			if (orientacion == 'up') {
-				unObjeto.position(position.up(1))
-			} else if (orientacion == 'down') {
-				unObjeto.position(position.down(1))
-			} else if (orientacion == 'left') {
-				unObjeto.position(position.left(1))
-			} else if (orientacion == 'right') {
-				unObjeto.position(position.right(1))
-			}
-		}
-	}
-
-	method posicionDelante() {
-		return if (orientacion == 'up') {
-			position.up(1)
-		} else if (orientacion == 'down') {
-			position.down(1)
-		} else if (orientacion == 'left') {
-			position.left(1)
-		} else if (orientacion == 'right') {
-			position.right(1)
-		}
-	}
 
 	method dejarObjeto() {
 		superficieDelante.apoyar(objetoEnMano)
@@ -156,5 +122,23 @@ class Chef {
 		pocion.aplicarBeneficio()
 		game.removeVisual(pocion)
 	}
+	
+	method posicionDelante() {
+		return 
+			orientacion.mover(position)
+
+	}
 }
+
+//Directions
+class Direction {method text() method mover(position)}
+
+object up inherits Direction   { 
+	override method text() = "up"    override method mover(position){return position.up(1)}
+}
+object right inherits Direction{	override method text() = "right" override method mover(position){ return position.right(1)}}
+object down inherits Direction {    override method text() = "down"  override method mover(position){ return position.down(1)}}
+object left inherits Direction {	override method text() = "left"  override method mover(position){ return position.left(1)}}
+
+
 
