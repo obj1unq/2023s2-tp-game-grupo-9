@@ -9,9 +9,7 @@ class Movement{
   var property orientacion = down
   var property image = 'player-' + orientacion.text() + '.png'
   
-  method actualizarImagen() {
-		image = 'player-' + orientacion.text() + '.png'
-  }
+  method actualizarImagen() {image = 'player-' + orientacion.text() + '.png'}
 	
   method arriba() {
     orientacion = up
@@ -55,8 +53,8 @@ class Movement{
 
 
 class Chef inherits Movement {	
-	var superficieDelante = null
-	var objetoEnMano = null
+	var property superficieDelante = null
+	var property objetoEnMano = null
 
 	method haySuperficieDelante() {
 		return game.getObjectsIn(orientacion.mover(position)).any({ e => e.esSuperficie()})
@@ -97,9 +95,7 @@ class Chef inherits Movement {
 		objetoEnMano = null
 	}
 
-	method accion() {
-		superficieDelante.accion()
-	}
+	method accion() {superficieDelante.accion()}
 
 	method agarrarObjeto() {
 		objetoEnMano = superficieDelante.objetoApoyado()
@@ -123,22 +119,36 @@ class Chef inherits Movement {
 		game.removeVisual(pocion)
 	}
 	
-	method posicionDelante() {
-		return 
-			orientacion.mover(position)
-
-	}
+	method posicionDelante(){return orientacion.mover(position)}
 }
 
 //Directions
 class Direction {method text() method mover(position)}
 
 object up inherits Direction   { 
-	override method text() = "up"    override method mover(position){return position.up(1)}
+	override method text() = "up"    
+	override method mover(position){
+		return position.up(1)
+	}
 }
-object right inherits Direction{	override method text() = "right" override method mover(position){ return position.right(1)}}
-object down inherits Direction {    override method text() = "down"  override method mover(position){ return position.down(1)}}
-object left inherits Direction {	override method text() = "left"  override method mover(position){ return position.left(1)}}
+object right inherits Direction{	
+	override method text() = "right" 
+	override method mover(position){ 
+		return position.right(1)
+	}
+}
+object down inherits Direction {    
+	override method text() = "down"  
+	override method mover(position){ 
+		return position.down(1)
+	}
+}
+object left inherits Direction {	
+	override method text() = "left"  
+	override method mover(position){ 
+		return position.left(1)
+	}
+}
 
 
 

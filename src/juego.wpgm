@@ -1,6 +1,6 @@
 import wollok.game.*
 import Chef.*
-import direcciones.*
+//import direcciones.* --Ya esta implementado con el chef
 import extras.*
 import Mesada.*
 import timer.*

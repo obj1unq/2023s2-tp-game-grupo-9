@@ -1,6 +1,89 @@
+import Ingrediente.*
+import wollok.game.*
+import Chef.*
+import Mesada.*
+import extras.*
+import timer.*
+import perk.*
+import randomizer.*
+import mapa.*
 
-test "testX" {
+describe "test chef" {
+	//Chef
+	var player = new Chef(position=game.at(1,3))
 
-	assert.that(true)
+	method initialize(){
+	game.cellSize(80)
+	game.boardGround("assets/background.png")
+	mapa.generar()
+	game.addVisual(player)
+	}
+	
+	test "choca con mesada de arriba"{
+		player = new Chef(position = game.at(7,game.height()-2))
+		player.arriba()
+		assert.that(player.superficieDelante() != null)
+	}
 
+	test "choca con mesada de abajo"{
+		player = new Chef(position = game.at(6,1))
+		player.abajo()
+		assert.that(player.superficieDelante() != null)
+	}
+	
+	test "Se mueve hacia arriba"{
+		player = new Chef(position = game.at(1,3))
+		player.arriba()
+		assert.equals(game.at(1,4),player.position())
+	}
+	
+	test "Se mueve hacia abajo"{
+		player = new Chef(position = game.at(2,3))
+		player.abajo()
+		assert.equals(game.at(2,2),player.position())
+	}
+	
+	test "Se mueve hacia izquierda"{
+		player = new Chef(position = game.at(5,3))
+		player.izquierda()
+		assert.equals(game.at(4,3),player.position())
+	}
+	
+	test "Se mueve hacia derecha"{
+		player = new Chef(position = game.at(3,3))
+		player.derecha()
+		assert.equals(game.at(4,3),player.position())
+	}
+	
+	test "no puede ir a esa posicion con (0,n)"{
+		player = new Chef(position = game.at(1,5))
+		player.izquierda()
+		assert.equals(game.at(1,5),player.position())
+	}
+	
+	test "no puede ir a esa posicion con (n,0)"{
+		player = new Chef(position = game.at(5,1))
+		player.abajo()
+		assert.equals(game.at(5,1),player.position())
+	}
+	
+	test "actualiza la imagen arriba"{
+		player.arriba()
+		assert.equals(player.image(), 'player-up.png')
+	}
+	
+	test "actualiza la imagen abajo"{
+		player.abajo()
+		assert.equals(player.image(), 'player-down.png')
+	}
+	
+	test "actualiza la imagen derecha"{
+		player.derecha()
+		assert.equals(player.image(), 'player-right.png')
+	}
+	
+	test "actualiza la imagen izquierda"{
+		player.izquierda()
+		assert.equals(player.image(), 'player-left.png')
+	}
 }
