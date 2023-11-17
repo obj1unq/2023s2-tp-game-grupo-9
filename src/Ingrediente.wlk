@@ -1,6 +1,7 @@
+import wollok.game.*
 class Ingrediente {
 
-	var property position
+	var property position= game.at(0,0)
 	var property estado = fresco
 	var property nombre
 	var property esCortable = true
@@ -104,5 +105,33 @@ object cocinado {
 
 	method nombre() = "-cocinado"
 
+}
+
+
+//factories 
+object factoryTomate{
+	
+	method nuevo() {
+		return new Ingrediente(nombre="tomate",estado=cortado)
+	}
+}
+
+object factoryLechuga{
+	
+	method nuevo() {
+		return new Ingrediente(nombre="lechuga")
+	}
+}
+
+object factoryPan{
+		method nuevo() {
+		return new Ingrediente(nombre="pan-cortado")
+	}
+}
+
+object factoryCarne{
+		method nuevo() {
+		return new Ingrediente(nombre="carne", estado=cocinado)
+	}
 }
 

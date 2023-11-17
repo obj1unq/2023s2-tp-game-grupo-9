@@ -1,12 +1,16 @@
 import wollok.game.*
-object randomizer {
+
+class Randomizer {
 		
-	method position() {
+	method position(){
 		return 	game.at( 
-					(0 .. game.width() - 1 ).anyOne(),
-					(0..  game.height() - 1).anyOne()
+			self.ancho(), self.alto()
 		) 
 	}
+	
+	method ancho()
+	
+	method alto() = (0..  game.height() - 1).anyOne()
 	
 	method emptyPosition() {
 		const position = self.position()
@@ -16,5 +20,21 @@ object randomizer {
 		else {
 			return self.emptyPosition()
 		}
+	}
+
+}
+					
+
+object positionPerk inherits Randomizer{
+	
+	override method ancho(){
+		return (0 .. 12 ).anyOne()
+	}
+}
+
+object positionPedido inherits Randomizer {
+	
+	override method ancho(){
+		return game.width() - 2
 	}
 }

@@ -14,6 +14,10 @@ class Plato {
 		ingredientes.add(ingrediente)
 	}
 	
+	method quitarIngredientes(){
+		ingredientes.removeAll(ingredientes)
+	}
+	
 	method validarPlato(ingrediente) {
 		if (ingrediente == self) {
 			self.error("No se pueden apilar los platos.")
@@ -25,6 +29,19 @@ class Plato {
 	}
 	
 	method image() = if (ingredientes.size() == 0) "plato-vacio.png" else	""
+	
+		method ingredientesEnPlato(pedido){
+		return ingredientes.all({i=> pedido.ingredientes().contains(i.nombre())})
+	}
+
+	method limpiarPlato(pedido){
+		if (self.ingredientesEnPlato(pedido)){
+			pedido.quitar(pedido)
+			self.quitarIngredientes()
+		}else {
+			self.error("Su pedido es erroneo")
+		}
+	}
 	
 }
 

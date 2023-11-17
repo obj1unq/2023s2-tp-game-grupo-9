@@ -9,6 +9,7 @@ import perk.*
 import randomizer.*
 import mapa.*
 import Chef.*
+import pedido.*
 
 program juego {
 	const jugador = new Chef()
@@ -33,6 +34,9 @@ program juego {
 	game.onTick(1000,"descontar tiempo" ,{timer.descontarTiempo()})
 	game.schedule(1000.randomUpTo(96000), {=> perk.aparicion()})
 	game.onCollideDo(jugador, {pocion => pocion.esActivada(jugador)})
+	
+	//pedidos
+	game.onTick(1000,"pedidos", {pedidoManager.generar()})
 	
 	game.start()
 }

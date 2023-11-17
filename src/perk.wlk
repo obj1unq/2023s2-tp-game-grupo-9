@@ -4,7 +4,7 @@ import timer.*
 
 
 object perk {
-	const property position=randomizer.emptyPosition()
+	const property position=positionPerk.emptyPosition()
 	const property esSuperficie = false
 	
 	method image(){
