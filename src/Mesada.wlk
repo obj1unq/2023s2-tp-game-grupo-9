@@ -1,6 +1,7 @@
 import wollok.game.*
 import Ingrediente.*
 import extras.*
+import soundProducer.*
 
 class Mesada {
 
@@ -105,6 +106,9 @@ class Plancha inherits Mesada {
 		self.validarObjeto(objeto)
 		super(objeto)
 		objeto.cocinar()
+		const parrilla = soundProducer.sound("sounds/parrilla.mp3")
+		parrilla.volume(0.5)
+		parrilla.play()
 	}
 
 	method validarObjeto(objeto) {

@@ -10,6 +10,7 @@ import randomizer.*
 import mapa.*
 import Chef.*
 import pedido.*
+import soundProducer.*
 
 program juego {
 	const jugador = new Chef()
@@ -37,6 +38,11 @@ program juego {
 	
 	//pedidos
 	game.onTick(1000,"pedidos", {pedidoManager.generar()})
+	
+	//Musica
+	const fondo = game.sound("sounds/level.mp3")
+	fondo.shouldLoop(true)
+	game.schedule(500, { fondo.play()} )
 	
 	game.start()
 }
