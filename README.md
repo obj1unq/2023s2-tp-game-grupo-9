@@ -17,8 +17,7 @@ En el transcurso del juego pueden aparecer potenciadores, que brindan beneficios
 ## Instrucciones
 - Se utiliza las **flechas** para que el cocinero se traslade por todo el restaurante.
 - Para *tomar* los ingredientes y transportarlos utilizar la tecla **T**.
-- Para *colocar* los ingredientes sobre las superfices del restaurante,  se utiliza la tecla **D**.
-- En caso de querer *colocar y cortar* los ingredientes sobre la tabla, se utilizar la tecla **C**. 
+- Para *colocar y cortar* los ingredientes sobre las superfices del restaurante,  se utiliza la tecla **A**.
 
 ## Otros
 

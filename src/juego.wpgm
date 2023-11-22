@@ -19,6 +19,7 @@ program juego {
 	// configurar el tablero
 	game.cellSize(80)
 	game.boardGround("assets/background.png")
+	game.title("Parripollo")
 		
 	mapa.generar()
 	game.addVisualIn(timer, game.at(13, 7))
