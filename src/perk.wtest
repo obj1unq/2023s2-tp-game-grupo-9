@@ -1,0 +1,31 @@
+import wollok.game.*
+import perk.*
+import mapa.*
+import Chef.*
+
+describe "comportamiento de perk" {
+	var player = new Chef(position=game.at(1,3))
+	
+	method initialize(){
+		game.clear()
+		game.cellSize(80)
+		game.boardGround("assets/background.png")
+		mapa.generar()
+		game.addVisual(player)
+		game.addVisual(perk)
+	}
+			
+	test "chequear la superficie = false" {
+		assert.notThat(perk.esSuperficie())
+	}
+	
+	test "chequear la imagen"{
+		assert.equals("perk_congelar.png", perk.image())
+	}
+	
+	test "en el collide no hay excepciones" {
+		assert.doesNotThrowException{game.onCollideDo(player, {pocion => pocion.esActivada(player)})}
+		assert.doesNotThrowException({player.activar(perk)})
+	}
+	
+}
