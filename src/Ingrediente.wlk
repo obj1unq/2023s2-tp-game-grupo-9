@@ -108,31 +108,3 @@ object cocinado {
 
 }
 
-
-//factories 
-//object factoryTomate{
-//	
-//	method nuevo() {
-//		return new Ingrediente(nombre="tomate",estado=cortado)
-//	}
-//}
-//
-//object factoryLechuga{
-//	
-//	method nuevo() {
-//		return new Ingrediente(nombre="lechuga")
-//	}
-//}
-//
-//object factoryPan{
-//		method nuevo() {
-//		return new Ingrediente(nombre="pan-cortado")
-//	}
-//}
-//
-//object factoryCarne{
-//		method nuevo() {
-//		return new Ingrediente(nombre="carne", estado=cocinado)
-//	}
-//}
-
