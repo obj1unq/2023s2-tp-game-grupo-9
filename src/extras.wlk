@@ -28,9 +28,9 @@ class Plato {
 		}
 	}
 	
-	method image() = if (ingredientes.size() == 0) "plato-vacio.png" else	""
+	method image() = if (ingredientes.size() == 0) "plato-vacio.png" else ""
 	
-		method ingredientesEnPlato(pedido){
+	method ingredientesEnPlato(pedido){
 		return ingredientes.all({i=> pedido.ingredientes().contains(i.nombre())})
 	}
 

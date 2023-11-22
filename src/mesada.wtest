@@ -1,4 +1,5 @@
 import Mesada.*
+import extras.*
 import Ingrediente.*
 import wollok.game.*
 
@@ -9,11 +10,14 @@ describe "Test de Mesada" {
 	const despensaDePan = new DespensaDePan(position= game.at(0, 3))
 	const plancha = new Plancha(position= game.at(9, 7))
 	const tablaDeCortar = new TablaDeCortar(position= game.at(2, 0))
+	const mesaDeEntrega = new MesaDeEntrega(position= game.at(3, 0))
 	// Ingredientes
 	const pan = new Pan()
 	const carne = new Carne()
 	const tomate = new Tomate()
 	const lechuga = new Lechuga()
+	// extras
+	const plato = new Plato()
 
 	test "La mesada, inicialmente, se encuentra vacia" {
 		assert.notThat(mesada.estaOcupada())
@@ -57,6 +61,62 @@ describe "Test de Mesada" {
 	test "La despensa, al usarla, devuelve una nueva instancia del objeto que provee" {
 		despensaDePan.accion()
 		assert.notEquals(null, despensaDePan.objetoApoyado()) // el objeto apoyado es un pan
+	}
+	
+	test "Apoyar un plato sobre la mesada" {
+		mesada.apoyar(plato)
+		assert.that(mesada.estaOcupada())
+		assert.equals(plato, mesada.objetoApoyado())
+	}
+	
+	test "Apoyar un plato sobre la mesada y luego un pan" {
+		mesada.apoyar(plato)
+		assert.equals(plato, mesada.objetoApoyado())
+		mesada.apoyar(pan)
+		assert.equals(plato, mesada.objetoApoyado())
+	}
+	
+	test "Agregar un pan a un plato" {
+		plato.agregarIngrediente(pan)
+		assert.equals(#{ pan }, plato.ingredientes())
+	}
+	
+//	test "Agregar una hamburguesa (pan, carne, tomate, lechuga) a un plato" {
+//		plato.agregarIngrediente(pan)
+//		// la carne se tiene que cortar y cocinar
+//		tablaDeCortar.apoyar(carne)
+//		tablaDeCortar.accion()
+//		tablaDeCortar.sacar()
+//		plancha.apoyar(carne)
+//		plato.agregarIngrediente(carne)
+//		// el tomate se tiene que cortar
+//		tablaDeCortar.apoyar(tomate)
+//		tablaDeCortar.accion()
+//		tablaDeCortar.sacar()
+//		plato.agregarIngrediente(tomate)
+//		// la lechuga se tiene que cortar
+//		tablaDeCortar.apoyar(lechuga)
+//		tablaDeCortar.accion()
+//		plato.agregarIngrediente(lechuga)
+//		assert.equals(#{ pan, carne, tomate, lechuga }, plato.ingredientes())
+//	}
+	
+	test "Apoyar un pan en la mesa de entrega" {
+		mesaDeEntrega.apoyar(pan)
+		//assert.equals([ pan ], mesaDeEntrega.ingredientes())
+		assert.equals("mesa-de-entrega-pan.png", mesaDeEntrega.image())
+	}
+	
+	test "Apoyar un pan y una carne en la mesa de entrega" {
+		const miPan = new Pan()
+		mesaDeEntrega.apoyar(miPan)
+		tablaDeCortar.apoyar(carne)
+		tablaDeCortar.accion()
+		tablaDeCortar.sacar()
+		plancha.apoyar(carne)
+		mesaDeEntrega.apoyar(carne)
+		//assert.equals([ pan, carne ], mesaDeEntrega.ingredientes())
+		assert.equals("mesa-de-entrega-pan-carne.png", mesaDeEntrega.image())
 	}
 
 }

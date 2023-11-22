@@ -2,6 +2,7 @@ import wollok.game.*
 import Ingrediente.*
 import extras.*
 import soundProducer.*
+import pedido.*
 
 class Mesada {
 
@@ -27,13 +28,12 @@ class Mesada {
 	}
 
 	method validarMesada() {
-		if (self.estaOcupada()) {
+		if (self.estaOcupada() && not objetoApoyado.esPlato()) {
 			self.error("La mesada se encuentra ocupada")
 		}
 	}
 
-	method accion() {
-	}
+	method accion() {}
 
 	method esDespensa() = false
 
@@ -80,13 +80,13 @@ class DespensaDeCarne inherits Despensa {
 
 }
 
-class DespensaDePlato inherits Despensa {
-
-	override method image() = "despensa-plato.png"
-
-	override method objetoApoyado() = if (self.estaOcupada()) super() else new Plato()
-
-}
+//class DespensaDePlato inherits Despensa {
+//
+//	override method image() = "despensa-plato.png"
+//
+//	override method objetoApoyado() = if (self.estaOcupada()) super() else new Plato()
+//
+//}
 
 class TablaDeCortar inherits Mesada {
 
@@ -112,7 +112,7 @@ class Plancha inherits Mesada {
 	}
 
 	method validarObjeto(objeto) {
-		if (!objeto.esCocinable()) {
+		if (not objeto.esCocinable()) {
 			self.error("No se puede cocinar")
 		}
 	}
@@ -129,6 +129,68 @@ class Tacho inherits Mesada {
 		} else {
 			game.removeVisual(objeto)
 			objetoApoyado = null
+		}
+	}
+	
+}
+
+class MesaDeEntrega inherits Mesada {
+	
+	const property ingredientes = []
+	const pedidosPendientes = pedidoManager.generados()
+	
+	override method estaOcupada() = false
+	
+	override method image() {
+		if (ingredientes.size() == 0) {
+			return "mesa-de-entrega.png"
+		} else {
+			return "mesa-de-entrega-" + ingredientes.map({ e => e.nombre() }).join('-') + ".png"
+		}
+	}
+	
+	override method apoyar(objeto) {
+		self.agregarIngrediente(objeto)
+	}
+	
+	override method accion() {
+		if (self.hayPedidoCompletado()) {
+			self.quitarIngredientes()
+			pedidoManager.quitar(self.pedidoCompletado())
+		}
+	}
+	
+	method mapPorNombre(listaIngredientes) = listaIngredientes.map({ ingrediente => ingrediente.nombre()}).asSet()
+	
+	method listaDeIngredientesDe(pedido) = self.mapPorNombre(pedido.ingredientes())
+	
+	method pedidoCompletado() = pedidosPendientes.find({ pedido => self.listaDeIngredientesDe(pedido) == self.listaDeIngredientesIguales() })
+	
+	method listaDeIngredientesIguales() = self.listaDeIngredientesDePedidos().filter({ e => e == self.mapPorNombre(ingredientes) })
+	
+	method listaDeIngredientesDePedidos() = pedidosPendientes.map({ pedido => self.listaDeIngredientesDe(pedido) })
+	
+	method hayPedidoCompletado() = not self.listaDeIngredientesIguales().isEmpty()
+	
+	method agregarIngrediente(ingrediente) {
+		self.validarPlato(ingrediente)
+		ingredientes.add(ingrediente)
+		game.removeVisual(ingrediente)
+	}
+	
+	method quitarIngredientes(){
+		ingredientes.clear()
+	}
+	
+	method validarPlato(ingrediente) {
+//		if (ingrediente.esCortable()) {
+//			self.error("El ingrediente no está cortado.")
+//		} else if (ingrediente.esCocinable()) {
+//			self.error("El ingrediente no está cocinado.")
+//		}
+		
+		if (ingredientes.isEmpty() && ingrediente.nombre() != "pan") {
+			self.error("Primero tiene que ir el pan.")
 		}
 	}
 	

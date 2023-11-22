@@ -16,15 +16,15 @@ class Pedido{
 
 object pedidoManager{
 
-	const pedidos = []
-	const generados = []
+	const property pedidos = []
+	const property generados = []
 	const aux = []
 	const limite = 3
 	
 	method inicializarPedidos(){
-		const pedido1 = new Pedido(nombreImg="tomate-cortado_lechuga", ingredientes= [factoryTomate.nuevo(), factoryLechuga.nuevo()])
-		const pedido2 = new Pedido(nombreImg="tomate-cortado_lechuga_carne-cocinado", ingredientes= [factoryTomate.nuevo(), factoryLechuga.nuevo(), factoryCarne.nuevo()])
-		const pedido3= new Pedido(nombreImg="tomate-cortado_", ingredientes= [factoryTomate.nuevo()])
+		const pedido1 = new Pedido(nombreImg="tomate-cortado_lechuga", ingredientes= [new Tomate(), new Tomate()])
+		const pedido2 = new Pedido(nombreImg="tomate-cortado_lechuga_carne-cocinado", ingredientes= [new Tomate(), new Tomate(), new Tomate()])
+		const pedido3= new Pedido(nombreImg="tomate-cortado_", ingredientes= [new Tomate()])
 		pedidos.addAll([pedido1,pedido2,pedido3])
 	}
 	

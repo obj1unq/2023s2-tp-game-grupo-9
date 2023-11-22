@@ -64,9 +64,9 @@ object tch {
 	}	
 }
 
-object dpl {
+object mde {
 	method generar(position) {
-		game.addVisual(new DespensaDePlato(position=position))
+		game.addVisual(new MesaDeEntrega(position=position))
 	}
 }
 
@@ -75,12 +75,12 @@ object dpl {
 object mapa {
 	
 	const celdas = [
-		[m,m,_,_,m,m,m,m,m,pl,pl,pl,m,_,_],
+		[m,m,m,m,m,m,m,m,m,pl,pl,pl,m,_,_],
 		[dt,_,_,_,_,_,_,_,_,_,_,_,m,_,_],
 		[dc,_,_,_,_,_,_,_,_,_,_,_,m,_,_],
 		[dl,_,_,_,_,_,_,_,_,_,_,_,m,_,_],
 		[dp,_,_,_,_,_,_,_,_,_,_,_,m,_,_],		
-		[m,_,_,_,_,_,_,_,_,_,_,_,dpl,_,_],		
+		[m,_,_,_,_,_,_,_,_,_,_,_,mde,_,_],		
 		[tch,_,_,_,_,_,_,_,_,_,_,_,m,_,_],
 		[m,m,tc,m,tc,m,m,m,m,m,m,m,m,_,_]	
 	].reverse()
