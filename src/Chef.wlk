@@ -2,7 +2,7 @@ import wollok.game.*
 import extras.*
 import Mesada.*
 import Ingrediente.*
-
+import soundProducer.*
 
 class Movement{
   var property position = game.at(2, 5)
@@ -93,6 +93,9 @@ class Chef inherits Movement {
 	method dejarObjeto() {
 		superficieDelante.apoyar(objetoEnMano)
 		objetoEnMano = null
+		const dropSound = soundProducer.sound("sounds/drop.mp3")
+		dropSound.volume(0.5)
+		dropSound.play()
 	}
 
 	method accion() {superficieDelante.accion()}
@@ -104,6 +107,10 @@ class Chef inherits Movement {
 			game.addVisual(objetoEnMano)
 		}
 		superficieDelante.sacar()
+		const pickup = soundProducer.sound("sounds/pickup.mp3")
+		pickup.volume(0.5)
+		pickup.play()
+		
 	}
 
 	method agarrarOSoltarObjeto() {

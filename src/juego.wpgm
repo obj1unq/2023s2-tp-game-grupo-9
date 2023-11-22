@@ -10,6 +10,7 @@ import randomizer.*
 import mapa.*
 import Chef.*
 import pedido.*
+import soundProducer.*
 
 program juego {
 	const jugador = new Chef()
@@ -18,6 +19,7 @@ program juego {
 	// configurar el tablero
 	game.cellSize(80)
 	game.boardGround("assets/background.png")
+	game.title("Parripollo")
 		
 	mapa.generar()
 	game.addVisualIn(timer, game.at(13, 7))
@@ -37,6 +39,11 @@ program juego {
 	
 	//pedidos
 	game.onTick(1000,"pedidos", {pedidoManager.generar()})
+	
+	//Musica
+	const fondo = game.sound("sounds/level.mp3")
+	fondo.shouldLoop(true)
+	game.schedule(500, { fondo.play()} )
 	
 	game.start()
 }
