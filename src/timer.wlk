@@ -5,12 +5,19 @@ object timer {
 	var property tiempo = 120
 	var property temporalizadorActivo = true
 	
-		method descontarTiempo(){
+	method descontarTiempo(){
+		self.finalizarJuego()
 		if (tiempo > 0 && temporalizadorActivo){
 				self.tiempoRestante()
 		}else if (temporalizadorActivo){
 			game.removeTickEvent("descontar tiempo")
 		}
+	}
+	
+	method finalizarJuego(){
+		if (tiempo == 0){
+			 game.schedule(2000, {game.stop()})
+		}	
 	}
 	
 	method tiempoRestante(){
