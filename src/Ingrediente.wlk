@@ -43,7 +43,7 @@ class Pan inherits Ingrediente {
 	
 	override method nombre() = "pan"
 	
-	override method esCortable() = false
+	override method esCortable() = estado.esCortable()
 	
 	override method estado() = fresco
 
@@ -71,7 +71,7 @@ class Carne inherits Ingrediente {
 	
 	override method nombre() = "carne"
 	
-	override method esCocinable() = true
+	override method esCocinable() = estado.esCocinable()
 	
 	override method estado() = fresco
 
