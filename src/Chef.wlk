@@ -7,47 +7,17 @@ class Movement{
   var property position = game.at(2, 5)
   var property orientacion = down
   var property image = 'player-' + orientacion.text() + '.png'
+  method actualizarImagen() {image = 'player-' + orientacion.text() + '.png'} 
+ 
+  method mover(orient) {
+    orientacion = orient
+    self.actualizarImagen()
+    self.movement()
+  } 
   
-  method actualizarImagen() {image = 'player-' + orientacion.text() + '.png'}
-	
-  method arriba() {
-    orientacion = up
-    self.actualizarImagen()
-    self.movement()
-  }
-
-  method abajo() {
-    orientacion = down
-    self.actualizarImagen()
-    self.movement()
-  }
-
-  method izquierda() {
-    orientacion = left
-    self.actualizarImagen()
-    self.movement()
-  }
-
-  method derecha() {
-    orientacion = right
-    self.actualizarImagen()
-    self.movement()
-  }
-
   method obtenerSuperficieDelante() 
-    // Implementar en chef esta lógica para obtener la superficie delante
-    // del movimiento.
-  
-
-  method actualizarPosicion(objetoEnMano) {
-    // Implementar en chef esta lógica para actualizar la posición
-    // del movimiento.
-  }
-  
-  method movement(){
-  	// Implementar en chef
-  }
-
+  method actualizarPosicion(objetoEnMano) {}
+  method movement(){}
 }
 
 

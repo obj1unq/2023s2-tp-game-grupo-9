@@ -23,10 +23,10 @@ program juego {
 	game.addVisualIn(timer, game.at(13, 7))
 	
 	// Acciones
-	keyboard.up().onPressDo({ jugador.arriba() })
-	keyboard.down().onPressDo({ jugador.abajo() })
-	keyboard.left().onPressDo({ jugador.izquierda() })
-	keyboard.right().onPressDo({ jugador.derecha() })
+	keyboard.up().onPressDo({ jugador.mover(up) })
+	keyboard.down().onPressDo({ jugador.mover(down) })
+	keyboard.left().onPressDo({ jugador.mover(left) })
+	keyboard.right().onPressDo({ jugador.mover(right) })
 	keyboard.t().onPressDo({ jugador.agarrarOSoltarObjeto() })
 	keyboard.a().onPressDo({ jugador.accion() })
 	

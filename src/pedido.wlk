@@ -12,7 +12,7 @@ class Pedido{
    		return nombreImg + ".jpg "
 	}
 	
-	method listaDeIngredientes() = ingredientes.map({ ingrediente => ingrediente.nombre() })
+	method listaDeIngredientes() = ingredientes.map({ ingrediente => ingrediente.nombre() }).asSet()
 
 }
 

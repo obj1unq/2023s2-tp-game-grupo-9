@@ -9,14 +9,22 @@ import mapa.*
 
 describe "test chef" {
 	//Chef
-	var player = new Chef(position=game.at(1,3))
-
+	var player = new Chef(position=game.at(3,2))
+	var miTomate = new Tomate()
+	var miLechuga = new Lechuga()
+	
+	
 	method initialize(){
-	game.cellSize(80)
-	game.boardGround("assets/background.png")
 	mapa.generar()
-	game.addVisual(player)
 	}
+	
+	test "ingrediente en mano se mueve con el jugador"{
+		player.position(game.at(3,2))
+		player.objetoEnMano(miTomate)
+		player.arriba()
+		assert.equals(miTomate.position(), game.at(3,4) )
+	}
+	
 	
 	test "choca con mesada de arriba"{
 		player = new Chef(position = game.at(7,game.height()-2))

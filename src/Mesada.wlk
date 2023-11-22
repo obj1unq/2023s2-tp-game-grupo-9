@@ -93,6 +93,9 @@ class TablaDeCortar inherits Mesada {
 
 	override method accion() {
 		objetoApoyado.cortar()
+		const cortar = soundProducer.sound("sounds/cortar.mp3")
+		cortar.volume(0.5)
+		cortar.play()
 	}
 
 }
@@ -125,6 +128,9 @@ class Tacho inherits Mesada {
 	override method apoyar(objeto) {
 		game.removeVisual(objeto)
 		objetoApoyado = null
+		const tacho = soundProducer.sound("sounds/tacho.mp3")
+		tacho.volume(0.5)
+		tacho.play()
 	}
 	
 }
@@ -152,6 +158,9 @@ class MesaDeEntrega inherits Mesada {
 		if (self.hayPedidoCompletado()) {
 			self.quitarIngredientes()
 			self.actualizarImage()
+			const check = soundProducer.sound("sounds/check.mp3")
+			check.volume(0.5)
+			check.play()
 			pedidoManager.quitar(self.pedidoCompletado())
 		}
 	}
