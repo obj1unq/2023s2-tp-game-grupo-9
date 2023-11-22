@@ -20,25 +20,18 @@ class Ingrediente {
 
 	method cocinar() {
 		self.validarCocinar()
-		self.validarEstado()
 		esCocinable = false
 		estado = cocinado
 	}
 
 	method validarCortar() {
-		if (not esCortable) {
+		if (not esCortable && estado != fresco) {
 			self.error("No se puede cortar")
 		}
 	}
 
 	method validarCocinar() {
-		if (not esCocinable) {
-			self.error("No se puede cocinar")
-		}
-	}
-
-	method validarEstado() {
-		if (estado != cortado) {
+		if (not esCocinable && estado != cortado) {
 			self.error("No se puede cocinar")
 		}
 	}

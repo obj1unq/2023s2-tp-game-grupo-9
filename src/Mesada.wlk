@@ -156,6 +156,7 @@ class MesaDeEntrega inherits Mesada {
 	override method accion() {
 		if (self.hayPedidoCompletado()) {
 			self.quitarIngredientes()
+			self.actualizarImage()
 			pedidoManager.quitar(self.pedidoCompletado())
 		}
 	}
@@ -183,11 +184,11 @@ class MesaDeEntrega inherits Mesada {
 	}
 	
 	method validarPlato(ingrediente) {
-//		if (ingrediente.esCortable()) {
-//			self.error("El ingrediente no está cortado.")
-//		} else if (ingrediente.esCocinable()) {
-//			self.error("El ingrediente no está cocinado.")
-//		}
+		if (ingrediente.esCortable()) {
+			self.error("El ingrediente no está cortado.")
+		} else if (ingrediente.esCocinable()) {
+			self.error("El ingrediente no está cocinado.")
+		}
 		
 		if (ingredientes.isEmpty() && ingrediente.nombre() != "pan") {
 			self.error("Primero tiene que ir el pan.")

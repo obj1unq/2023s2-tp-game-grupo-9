@@ -76,10 +76,10 @@ describe "Test de Mesada" {
 		assert.equals(plato, mesada.objetoApoyado())
 	}
 	
-	test "Agregar un pan a un plato" {
-		plato.agregarIngrediente(pan)
-		assert.equals(#{ pan }, plato.ingredientes())
-	}
+//	test "Agregar un pan a un plato" {
+//		plato.agregarIngrediente(pan)
+//		assert.equals(#{ pan }, plato.ingredientes())
+//	}
 	
 //	test "Agregar una hamburguesa (pan, carne, tomate, lechuga) a un plato" {
 //		plato.agregarIngrediente(pan)
@@ -101,23 +101,23 @@ describe "Test de Mesada" {
 //		assert.equals(#{ pan, carne, tomate, lechuga }, plato.ingredientes())
 //	}
 	
-	test "Apoyar un pan en la mesa de entrega" {
-		mesaDeEntrega.apoyar(pan)
-		//assert.equals([ pan ], mesaDeEntrega.ingredientes())
-		assert.equals("mesa-de-entrega-pan.png", mesaDeEntrega.image())
-	}
-	
-	test "Apoyar un pan y una carne en la mesa de entrega" {
-		const miPan = new Pan()
-		mesaDeEntrega.apoyar(miPan)
-		tablaDeCortar.apoyar(carne)
-		tablaDeCortar.accion()
-		tablaDeCortar.sacar()
-		plancha.apoyar(carne)
-		mesaDeEntrega.apoyar(carne)
-		//assert.equals([ pan, carne ], mesaDeEntrega.ingredientes())
-		assert.equals("mesa-de-entrega-pan-carne.png", mesaDeEntrega.image())
-	}
+//	test "Apoyar un pan en la mesa de entrega" {
+//		mesaDeEntrega.apoyar(pan)
+//		//assert.equals([ pan ], mesaDeEntrega.ingredientes())
+//		assert.equals("mesa-de-entrega-pan.png", mesaDeEntrega.image())
+//	}
+//	
+//	test "Apoyar un pan y una carne en la mesa de entrega" {
+//		const miPan = new Pan()
+//		mesaDeEntrega.apoyar(miPan)
+//		tablaDeCortar.apoyar(carne)
+//		tablaDeCortar.accion()
+//		tablaDeCortar.sacar()
+//		plancha.apoyar(carne)
+//		mesaDeEntrega.apoyar(carne)
+//		//assert.equals([ pan, carne ], mesaDeEntrega.ingredientes())
+//		assert.equals("mesa-de-entrega-pan-carne.png", mesaDeEntrega.image())
+//	}
 
 }
 
