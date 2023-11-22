@@ -11,6 +11,8 @@ class Pedido{
 	method image() {
    		return nombreImg + ".jpg "
 	}
+	
+	method listaDeIngredientes() = ingredientes.map({ ingrediente => ingrediente.nombre() })
 
 }
 

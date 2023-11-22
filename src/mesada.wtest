@@ -1,5 +1,4 @@
 import Mesada.*
-import extras.*
 import Ingrediente.*
 import wollok.game.*
 
@@ -16,8 +15,6 @@ describe "Test de Mesada" {
 	const carne = new Carne()
 	const tomate = new Tomate()
 	const lechuga = new Lechuga()
-	// extras
-	const plato = new Plato()
 
 	test "La mesada, inicialmente, se encuentra vacia" {
 		assert.notThat(mesada.estaOcupada())
@@ -75,31 +72,6 @@ describe "Test de Mesada" {
 		mesada.apoyar(pan)
 		assert.equals(plato, mesada.objetoApoyado())
 	}
-	
-//	test "Agregar un pan a un plato" {
-//		plato.agregarIngrediente(pan)
-//		assert.equals(#{ pan }, plato.ingredientes())
-//	}
-	
-//	test "Agregar una hamburguesa (pan, carne, tomate, lechuga) a un plato" {
-//		plato.agregarIngrediente(pan)
-//		// la carne se tiene que cortar y cocinar
-//		tablaDeCortar.apoyar(carne)
-//		tablaDeCortar.accion()
-//		tablaDeCortar.sacar()
-//		plancha.apoyar(carne)
-//		plato.agregarIngrediente(carne)
-//		// el tomate se tiene que cortar
-//		tablaDeCortar.apoyar(tomate)
-//		tablaDeCortar.accion()
-//		tablaDeCortar.sacar()
-//		plato.agregarIngrediente(tomate)
-//		// la lechuga se tiene que cortar
-//		tablaDeCortar.apoyar(lechuga)
-//		tablaDeCortar.accion()
-//		plato.agregarIngrediente(lechuga)
-//		assert.equals(#{ pan, carne, tomate, lechuga }, plato.ingredientes())
-//	}
 	
 //	test "Apoyar un pan en la mesa de entrega" {
 //		mesaDeEntrega.apoyar(pan)

@@ -163,13 +163,11 @@ class MesaDeEntrega inherits Mesada {
 	
 	method mapPorNombre(listaIngredientes) = listaIngredientes.map({ ingrediente => ingrediente.nombre()}).asSet()
 	
-	method listaDeIngredientesDe(pedido) = self.mapPorNombre(pedido.ingredientes())
-	
-	method pedidoCompletado() = pedidosPendientes.find({ pedido => self.listaDeIngredientesDe(pedido) == self.listaDeIngredientesIguales() })
+	method pedidoCompletado() = pedidosPendientes.find({ pedido => pedido.listaDeIngredientes() == self.listaDeIngredientesIguales() })
 	
 	method listaDeIngredientesIguales() = self.listaDeIngredientesDePedidos().filter({ e => e == self.mapPorNombre(ingredientes) })
 	
-	method listaDeIngredientesDePedidos() = pedidosPendientes.map({ pedido => self.listaDeIngredientesDe(pedido) })
+	method listaDeIngredientesDePedidos() = pedidosPendientes.map({ pedido => pedido.listaDeIngredientes() })
 	
 	method hayPedidoCompletado() = not self.listaDeIngredientesIguales().isEmpty()
 	
