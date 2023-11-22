@@ -60,19 +60,6 @@ describe "Test de Mesada" {
 		assert.notEquals(null, despensaDePan.objetoApoyado()) // el objeto apoyado es un pan
 	}
 	
-	test "Apoyar un plato sobre la mesada" {
-		mesada.apoyar(plato)
-		assert.that(mesada.estaOcupada())
-		assert.equals(plato, mesada.objetoApoyado())
-	}
-	
-	test "Apoyar un plato sobre la mesada y luego un pan" {
-		mesada.apoyar(plato)
-		assert.equals(plato, mesada.objetoApoyado())
-		mesada.apoyar(pan)
-		assert.equals(plato, mesada.objetoApoyado())
-	}
-	
 //	test "Apoyar un pan en la mesa de entrega" {
 //		mesaDeEntrega.apoyar(pan)
 //		//assert.equals([ pan ], mesaDeEntrega.ingredientes())

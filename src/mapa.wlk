@@ -1,5 +1,4 @@
 import wollok.game.*
-import extras.*
 import timer.*
 import Mesada.*
 import Chef.*

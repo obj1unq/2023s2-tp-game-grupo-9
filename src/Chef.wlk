@@ -1,5 +1,4 @@
 import wollok.game.*
-import extras.*
 import Mesada.*
 import Ingrediente.*
 import soundProducer.*

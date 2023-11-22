@@ -1,6 +1,5 @@
 import wollok.game.*
 import Ingrediente.*
-import extras.*
 import soundProducer.*
 import pedido.*
 
