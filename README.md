@@ -7,10 +7,11 @@ En el transcurso del juego pueden aparecer potenciadores, que brindan beneficios
 ## Ingredientes
 Los ingredientes deben ser tomados desde la despensa de cada uno, para cortarlos o cocinarlos hay que moverse por el mapa hasta llegar a las tablas de corte o la plancha.
 Con los ingredientes se debe de realizar los pedidos que figuran a la derecha de la pantalla y entregarlos en la Mesa de Entrega donde se encuentra un plato.
--Carne : Se puede cortar y cocinar
--Pan: Se puede cortar
--Lechuga: Se puede cortar
--Tomate: Se puede cortar
+
+- Carne : Se puede cortar y cocinar
+- Pan: Se puede cortar
+- Lechuga: Se puede cortar
+- Tomate: Se puede cortar
 
 ## Equipo de desarrollo
 
