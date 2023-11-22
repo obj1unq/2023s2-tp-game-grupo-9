@@ -1,0 +1,28 @@
+import wollok.game.*
+import timer.*
+
+
+describe "timer test"{
+	
+	var  tiempo = 150
+	
+	test "división de minutos" {
+		assert.equals(2, timer.minutos(tiempo))
+	}
+	
+	test "division de segundos"{
+	assert.equals(30, timer.segundos(tiempo))
+	}
+	
+	test "finaliza el juego cuando llega a cero " {
+		tiempo = 0
+		assert.doesNotThrowException({timer.finalizarJuego()})
+	}
+	
+	test "verificar que la funcion descontarTiempo, elimina de 1"{
+		timer.tiempo(10)
+		timer.descontarTiempo()
+		assert.equals(9, timer.tiempo())
+	}
+	
+}
