@@ -7,6 +7,7 @@ class Pedido{
 	var property position = positionPedido.emptyPosition()
 	const property ingredientes = []
 	var property activo = true
+	const id
 	
 	method image() {
    		return nombreImg + ".jpg "
@@ -24,15 +25,15 @@ object pedidoManager{
 	const limite = 3
 	
 	method inicializarPedidos(){
-		const pedido1 = new Pedido(nombreImg="tomate-cortado_lechuga", ingredientes= [new Pan(), new Carne()])
-		const pedido2 = new Pedido(nombreImg="tomate-cortado_lechuga_carne-cocinado", ingredientes= [new Tomate(), new Tomate(), new Tomate()])
-		const pedido3= new Pedido(nombreImg="tomate-cortado_", ingredientes= [new Tomate()])
+		const pedido1 = new Pedido(id=3,nombreImg="hamburguesa_lechuga", ingredientes= [new Pan(), new Carne(), new Lechuga()])
+		const pedido2 = new Pedido(id=2,nombreImg="hamburguesa_tomate_lechuga", ingredientes= [new Tomate(), new Tomate(), new Tomate()])
+		const pedido3= new Pedido(id=1,nombreImg="hamburguesa", ingredientes= [new Pan(), new Carne()])
 		pedidos.addAll([pedido1,pedido2,pedido3])
 	}
 	
 	method generar(){
 		self.inicializarPedidos()
-			if (generados.size()<= limite && !pedidos.isEmpty()){
+			if (generados.size()< limite && !pedidos.isEmpty()){
 				const pedido= pedidos.anyOne()
 				pedido.activo(false)
 				self.crearSi(pedido)

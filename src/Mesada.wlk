@@ -79,14 +79,6 @@ class DespensaDeCarne inherits Despensa {
 
 }
 
-//class DespensaDePlato inherits Despensa {
-//
-//	override method image() = "despensa-plato.png"
-//
-//	override method objetoApoyado() = if (self.estaOcupada()) super() else new Plato()
-//
-//}
-
 class TablaDeCortar inherits Mesada {
 
 	override method image() = if (self.estaOcupada()) "tabla-de-cortar.png" else "tabla-de-cortar-vacia.png"
@@ -161,19 +153,21 @@ class MesaDeEntrega inherits Mesada {
 			const check = soundProducer.sound("sounds/check.mp3")
 			check.volume(0.5)
 			check.play()
-			pedidoManager.quitar(self.pedidoCompletado())
 		}
 	}
 	
-	method mapPorNombre(listaIngredientes) = listaIngredientes.map({ ingrediente => ingrediente.nombre()}).asSet()
 	
-	method pedidoCompletado() = pedidosPendientes.find({ pedido => pedido.listaDeIngredientes() == self.listaDeIngredientesIguales() })
+	method mapPorNombre(listaIngredientes) =  listaIngredientes.map({ ingrediente => ingrediente.nombre()}).asSet()
 	
-	method listaDeIngredientesIguales() = self.listaDeIngredientesDePedidos().filter({ e => e == self.mapPorNombre(ingredientes) })
+	method pedidoCompletado()= pedidosPendientes.find({ pedido => pedido.listaDeIngredientes() == self.listaDeIngredientesIguales() })
+
 	
-	method listaDeIngredientesDePedidos() = pedidosPendientes.map({ pedido => pedido.listaDeIngredientes() })
+	method listaDeIngredientesIguales()= self.listaDeIngredientesDePedidos().filter({ e => e == self.mapPorNombre(ingredientes) })
 	
-	method hayPedidoCompletado() = not self.listaDeIngredientesIguales().isEmpty()
+	method listaDeIngredientesDePedidos()= pedidosPendientes.map({ pedido => pedido.listaDeIngredientes() })
+
+	method hayPedidoCompletado()  = not self.listaDeIngredientesIguales().isEmpty()
+	
 	
 	method agregarIngrediente(ingrediente) {
 		self.validarPlato(ingrediente)

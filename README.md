@@ -8,10 +8,10 @@ En el transcurso del juego pueden aparecer potenciadores, que brindan beneficios
 Los ingredientes deben ser tomados desde la despensa de cada uno, para cortarlos o cocinarlos hay que moverse por el mapa hasta llegar a las tablas de corte o la plancha.
 Con los ingredientes se debe de realizar los pedidos que figuran a la derecha de la pantalla y entregarlos en la Mesa de Entrega donde se encuentra un plato.
 
-- Carne : Se puede cortar y cocinar
-- Pan: Se puede cortar
-- Lechuga: Se puede cortar
-- Tomate: Se puede cortar
+- Carne : Se debe cortar antes de cocinar
+- Pan: Se debe cortar
+- Lechuga: Se debe cortar
+- Tomate: Se debe cortar
 
 ## Equipo de desarrollo
 
@@ -29,6 +29,7 @@ Con los ingredientes se debe de realizar los pedidos que figuran a la derecha de
 - Se utiliza las **flechas** para que el cocinero se traslade por todo el restaurante.
 - Para *tomar* los ingredientes y transportarlos utilizar la tecla **T**.
 - Para *cortar, cocinar, entregar* los ingredientes sobre las mesadas del restaurante,  se utiliza la tecla **A**.
+- Para confirmar si un pedido está correcto debe presionar la tecla **A** cuando se encuentre frente al mostrador de entrega.
 
 ## Otros
 
