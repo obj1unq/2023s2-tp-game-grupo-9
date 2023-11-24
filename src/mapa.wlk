@@ -5,8 +5,7 @@ import Chef.*
 import Ingrediente.*
 
 object _ {
-	method generar(position) {
-	}	
+	method generar(position) {}	
 }
 
 object m {
@@ -16,43 +15,43 @@ object m {
 }
 
 object d {
-		method generar(position) {
+	method generar(position) {
 		game.addVisual(new Despensa(position=position))
 	}	
 }
 
 object dp {
-		method generar(position) {
+	method generar(position) {
 		game.addVisual(new DespensaDePan(position=position))
 	}	
 }
 
 object dt {
-		method generar(position) {
+	method generar(position) {
 		game.addVisual(new DespensaDeTomate(position=position))
 	}	
 }
 
 object dl {
-		method generar(position) {
+	method generar(position) {
 		game.addVisual(new DespensaDeLechuga(position=position))
 	}	
 }
 
 object dc {
-		method generar(position) {
+	method generar(position) {
 		game.addVisual(new DespensaDeCarne(position=position))
 	}	
 }
 
 object tc {
-		method generar(position) {
+	method generar(position) {
 		game.addVisual(new TablaDeCortar(position=position))
 	}	
 }
 
 object pl {
-		method generar(position) {
+	method generar(position) {
 		game.addVisual(new Plancha(position=position))
 	}	
 }
@@ -83,8 +82,6 @@ object mapa {
 		[tch,_,_,_,_,_,_,_,_,_,_,_,m,_,_],
 		[m,m,tc,m,tc,m,m,m,m,m,m,m,m,_,_]	
 	].reverse()
-	
-	
 	
 	method generar() {
 		game.width(celdas.anyOne().size())

@@ -26,7 +26,7 @@ object pedidoManager{
 	
 	method inicializarPedidos(){
 		const pedido1 = new Pedido(id=3,nombreImg="hamburguesa_lechuga", ingredientes= [new Pan(), new Carne(), new Lechuga()])
-		const pedido2 = new Pedido(id=2,nombreImg="hamburguesa_tomate_lechuga", ingredientes= [new Tomate(), new Tomate(), new Tomate()])
+		const pedido2 = new Pedido(id=2,nombreImg="hamburguesa_tomate", ingredientes= [new Pan(), new Carne(), new Tomate()])
 		const pedido3= new Pedido(id=1,nombreImg="hamburguesa", ingredientes= [new Pan(), new Carne()])
 		pedidos.addAll([pedido1,pedido2,pedido3])
 	}

@@ -40,3 +40,13 @@ object soundMock {
 	
 	method volume() = 0
 }
+
+object reproductor {
+	
+	method reproducir(sonido) {
+		const sound = soundProducer.sound("sounds/" + sonido + ".mp3")
+		sound.volume(0.5)
+		sound.play()
+	}
+	
+}

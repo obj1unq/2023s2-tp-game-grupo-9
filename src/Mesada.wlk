@@ -85,9 +85,7 @@ class TablaDeCortar inherits Mesada {
 
 	override method accion() {
 		objetoApoyado.cortar()
-		const cortar = soundProducer.sound("sounds/cortar.mp3")
-		cortar.volume(0.5)
-		cortar.play()
+		reproductor.reproducir("cortar")
 	}
 
 }
@@ -100,9 +98,7 @@ class Plancha inherits Mesada {
 		self.validarObjeto(objeto)
 		super(objeto)
 		objeto.cocinar()
-		const parrilla = soundProducer.sound("sounds/parrilla.mp3")
-		parrilla.volume(0.5)
-		parrilla.play()
+		reproductor.reproducir("parrilla")
 	}
 
 	method validarObjeto(objeto) {
@@ -120,9 +116,7 @@ class Tacho inherits Mesada {
 	override method apoyar(objeto) {
 		game.removeVisual(objeto)
 		objetoApoyado = null
-		const tacho = soundProducer.sound("sounds/tacho.mp3")
-		tacho.volume(0.5)
-		tacho.play()
+		reproductor.reproducir("tacho")
 	}
 	
 }
@@ -150,24 +144,21 @@ class MesaDeEntrega inherits Mesada {
 		if (self.hayPedidoCompletado()) {
 			self.quitarIngredientes()
 			self.actualizarImage()
-			const check = soundProducer.sound("sounds/check.mp3")
-			check.volume(0.5)
-			check.play()
+			reproductor.reproducir("check")
+		} else {
+			self.error("Ese pedido no existe.")
 		}
 	}
-	
 	
 	method mapPorNombre(listaIngredientes) =  listaIngredientes.map({ ingrediente => ingrediente.nombre()}).asSet()
 	
 	method pedidoCompletado()= pedidosPendientes.find({ pedido => pedido.listaDeIngredientes() == self.listaDeIngredientesIguales() })
-
 	
 	method listaDeIngredientesIguales()= self.listaDeIngredientesDePedidos().filter({ e => e == self.mapPorNombre(ingredientes) })
 	
 	method listaDeIngredientesDePedidos()= pedidosPendientes.map({ pedido => pedido.listaDeIngredientes() })
 
 	method hayPedidoCompletado()  = not self.listaDeIngredientesIguales().isEmpty()
-	
 	
 	method agregarIngrediente(ingrediente) {
 		self.validarPlato(ingrediente)
@@ -180,16 +171,26 @@ class MesaDeEntrega inherits Mesada {
 	}
 	
 	method validarPlato(ingrediente) {
+		self.validarIngrediente(ingrediente)
+		self.validarPrimeroEsPan(ingrediente)
+	}
+	
+	method validarIngrediente(ingrediente) {
 		if (ingrediente.esCortable()) {
 			self.error("El ingrediente no está cortado.")
 		} else if (ingrediente.esCocinable()) {
 			self.error("El ingrediente no está cocinado.")
 		}
-		
-		if (ingredientes.isEmpty() && ingrediente.nombre() != "pan") {
+	}
+	
+	method validarPrimeroEsPan(ingrediente) {
+		// El pan siempre tiene que ir primero.
+		if (ingredientes.isEmpty() && self.esPan(ingrediente)) {
 			self.error("Primero tiene que ir el pan.")
 		}
 	}
+	
+	method esPan(ingrediente) = ingrediente.nombre() != "pan"
 	
 }
 
